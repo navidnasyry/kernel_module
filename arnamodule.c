@@ -181,23 +181,14 @@ static ssize_t arna_read(struct file *filep, char *buffer, size_t len, loff_t *o
 static ssize_t arna_write(struct file *flip, const char *buffer,unsigned long len,  loff_t *offset) {
  /* This is a read-only device */
     printk(KERN_INFO "ARNA:: IN WRITE FUNCTION\n");
-    char* cmd;
+    char cmd[100];
 
 
-    // if (copy_from_user(cmd, buffer, strlen(buffer)) ) 
-    //     return -EFAULT;
-    int bl = copy_from_user(cmd, buffer, strlen(buffer));
-    printk(KERN_INFO "ARNA:: IN WRITE FUNCTION {%d}\n", bl);
+    // if (!copy_from_user(cmd, buffer, strlen(buffer))) 
+    //      return -EFAULT;
+    int bl = copy_from_user(cmd, buffer, 100);
 
-
-    //need lock
-
-    //command(cmd);
-    printk(KERN_INFO "ARNA:: IN WRITE FUNCTION 2\n");
-
-    kmalloc(sizeof(cmd), GFP_KERNEL);
-    printk(KERN_INFO "ARNA:: IN WRITE FUNCTION 3\n");
-
+    //kmalloc(sizeof(cmd), GFP_KERNEL);
     spin_lock(&lock);
     if (!spin_is_locked(&lock)) 
     { 
@@ -205,34 +196,6 @@ static ssize_t arna_write(struct file *flip, const char *buffer,unsigned long le
     } 
     command(cmd);
     spin_unlock(&lock);
-
-    //need unlock
-
-    //  size_t maxdatalen = 100, ncopied;
-    // char command[maxdatalen];
-    // if(count < maxdatalen)
-    // {
-    //     maxdatalen = count;
-    // }
-    // ncopied = copy_from_user(command, buf, maxdatalen);
-    // command[maxdatalen + 1] = '0';
-    // command[maxdatalen] = ',';
-    // if(ncopied != 0)
-    // {
-    //     // return -EFAULT;
-    // }
-    // pointer_command = command;
-    // kmalloc(sizeof(command), GFP_KERNEL);
-    // spin_lock(&lock);
-    // if (!spin_is_locked(&lock)) 
-    // { 
-    //     printk(KERN_INFO "UnLocked\n"); 
-    // } 
-    // commandChecker(command);
-    // spin_unlock(&lock);
-    // return count;
-
-
 
     return len;
 }
