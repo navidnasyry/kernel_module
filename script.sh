@@ -3,12 +3,12 @@
 make &&sudo insmod arnamodule.ko
 TMP=`cat /proc/devices | grep ARNA | cut -d" " -f 1`
 echo $TMP
-sudo mknod /dev/arnanode c $TMP $RANDOM
+sudo mknod /dev/arnanode c $TMP 200
 
 
 # RUN TEST
 
-sudo python3 pytest.py
+sudo python3 ./pytest.py
 
 sudo rm -rf /dev/arnanode &&sudo rmmod arnamodule && make clean
 
