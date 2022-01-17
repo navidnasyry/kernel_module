@@ -47,8 +47,7 @@ def gateway_2(fd:int):
 
 
 
-
-if __name__ == "__main__":
+def main():
     print(">>>>>>>>>>>>start<<<<<<<<<<<\n")
     path = "/dev/arnanode"
     print("OPEN FILE\n")
@@ -89,8 +88,6 @@ if __name__ == "__main__":
     t2.join()
     #end two threades
 
-    #write_to_file(fd, bardasht_action(0, 100000000))
-
 
     read_from_file(fd)
     
@@ -100,6 +97,11 @@ if __name__ == "__main__":
     print("\t\t<<<<<<<<<<<<<THE END>>>>>>>>>>>\n\n\n")
 
 
+
+
+
+if __name__ == "__main__":
+    main()
 
 
 
