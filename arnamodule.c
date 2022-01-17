@@ -69,7 +69,7 @@ void command(char *cmd)
             else if (strcmp(token, "b") == 0) sub[i] = -4;
             
             else {
-                printk(KERN_INFO "ARNA:: COMMAND ERROR :: Where you learn to type :))\n");
+                printk(KERN_INFO "ARNA:: COMMAND ERROR :: Where you learn to type ? :))\n");
                 return;
             }
         }
@@ -80,7 +80,7 @@ void command(char *cmd)
     {
         if (acs[sub[1]].money < sub[3])
         {
-            printk(KERN_INFO "ARNA:: ENTEGHAL ERROR :: You have no enough money :(\n");
+            printk(KERN_INFO "ARNA:: ENTEGHAL ERROR :: You do not have enough money :(\n");
             return;
         }
         acs[sub[1]].money -= sub[3];
@@ -94,7 +94,7 @@ void command(char *cmd)
     {
         if (acs[sub[1]].money < sub[3])
         {
-            printk(KERN_INFO "ARNA:: BARDASHT ERROR :: You have no enough money :(\n");
+            printk(KERN_INFO "ARNA:: BARDASHT ERROR :: You do not have enough money :(\n");
             return;
         }
         acs[sub[1]].money -= sub[3];
@@ -190,7 +190,7 @@ static ssize_t arna_write(struct file *flip, const char *buffer,unsigned long le
 
     //kmalloc(sizeof(cmd), GFP_KERNEL);
     spin_lock(&lock);
-    if (!spin_is_locked(&lock)) 
+    if (spin_is_locked(&lock)) 
     { 
         printk(KERN_INFO "ARNA :: UnLocked\n"); 
     } 

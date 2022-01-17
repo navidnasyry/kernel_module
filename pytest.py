@@ -5,13 +5,13 @@ from random import randint
 
 
 
-def enteghal_action(from_:str, to_:str, amount:str):
+def enteghal_action(from_, to_, amount):
     return f"e,{from_},{to_},{amount}"
 
-def variz_action(to_:str, amount:str):
+def variz_action(to_, amount):
     return f"v,-,{to_},{amount}"
 
-def bardasht_action(from_:str, amount:str):
+def bardasht_action(from_, amount):
     return f"b,{from_},-,{amount}"
 
 def reset_action():
@@ -32,23 +32,17 @@ def write_to_file(fd:int, cmd:str):
 def gateway_1(fd:int):
 
     for i in range(100):
-        print("in 2th thread : " + str(i))
         dis_acnt = randint(1,99)
         cmd = enteghal_action(str(dis_acnt), '0', 1)
-        print(cmd)
         write_to_file(fd, cmd)
-        print("in 2th thread : " + str(i))
 
 
 def gateway_2(fd:int):
 
     for i in range(100):
-        print("in 2th thread : " + str(i))
         dis_acnt = randint(1,99)
         cmd = enteghal_action(str(dis_acnt), '0', 1)
-        print(cmd)
         write_to_file(fd, cmd)
-        print("in 2th thread : " + str(i))
 
 
 
@@ -65,6 +59,25 @@ if __name__ == "__main__":
     #read file
     read_from_file(fd)
 
+    
+    #write_to_file(fd, bardasht_action(0, 10000))
+
+    # read_from_file(fd)
+
+    # write_to_file(fd, variz_action(0, 20000))
+
+    # read_from_file(fd)
+
+    # write_to_file(fd, enteghal_action(1, 2, 3000))
+
+    # read_from_file(fd)
+
+    # write_to_file(fd, reset_action())
+
+    # read_from_file(fd)  
+
+
+
     print("log1")
     t1 = th.Thread(target= gateway_1, args=(fd,))
     t2 = th.Thread(target= gateway_2, args=(fd,))
@@ -76,11 +89,15 @@ if __name__ == "__main__":
     t2.join()
     #end two threades
 
+    #write_to_file(fd, bardasht_action(0, 100000000))
+
+
     read_from_file(fd)
     
 
     os.close(fd)
-    print("\n\n<<<<<<<<<<<<<<<<THE END>>>>>>>>>>>>>>>>>>>\n\n\n")
+    print("\n\n\t\t\t NAVID & ARSALAN")
+    print("\t\t<<<<<<<<<<<<<THE END>>>>>>>>>>>\n\n\n")
 
 
 
